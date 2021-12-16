@@ -9,7 +9,6 @@ public class GameController : MonoBehaviour
 
     private void OnMouseDrag()
     {
-
         _plyerSphere.Decrease();
     }
 
