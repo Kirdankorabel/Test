@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private SphereCollider _playerSphere;
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private GameObject _projectileSpawn;
+    [SerializeField] private GameObject _target;
     [SerializeField] private GameObject _quad;
     private Projectile _projectile;
     private Plane _plane;
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
 
     public void Shot()
     {
-        _projectile.Shot(transform.forward * -5);//поменять множитель
+        _projectile.Shot(transform.forward * -50);//поменять множитель
         _projectile = null;
     }
 

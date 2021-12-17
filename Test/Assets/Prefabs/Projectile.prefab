@@ -106,8 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageRadius: 0
-  increaseSpeed: 0.2
-  _spawnPoint: {fileID: 0}
+  increaseSpeed: 2
 --- !u!54 &6419002525340482438
 Rigidbody:
   m_ObjectHideFlags: 0

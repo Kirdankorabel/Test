@@ -9,6 +9,7 @@ public class ObstacleController : MonoBehaviour
 
     public Vector2 size;
     [SerializeField] private Obstacle _obstaclePrefab;
+    [SerializeField] private int _number; 
     private List<Obstacle> _obstacles;
     private void Awake()
     {
@@ -18,7 +19,7 @@ public class ObstacleController : MonoBehaviour
     void Start()
     {
         _obstacles = new List<Obstacle>();
-        CreateObstacles(100);
+        CreateObstacles();
     }
 
     public List<Obstacle> GetObstaclesInRadius(Obstacle obstacle, float radius)
@@ -30,9 +31,9 @@ public class ObstacleController : MonoBehaviour
         return obstacles;
     }
 
-    private void CreateObstacles(int value)
+    private void CreateObstacles()
     {
-        for(var i = 0; i < value; i++)
+        for(var i = 0; i < _number; i++)
         {
             var coordinateX = Random.Range(0, size.x);
             var coordinateY = Random.Range(0, size.y);
