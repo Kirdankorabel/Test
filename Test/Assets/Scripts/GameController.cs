@@ -3,23 +3,16 @@
 public class GameController : MonoBehaviour
 {
     public static GameController Singletone { get; set; }
+    public Player plyer;
     [SerializeField] private Plane _plane;
-    [SerializeField] private Player _plyerSphere;
-
-    public Player GetPlayer => _plyerSphere;
-
-    private void Awake()
-    {
+    [SerializeField] private Plane _target;
+    
+    private void Awake() => 
         Singletone = this;
-    }
 
-    private void OnMouseDrag()
-    {
-        _plyerSphere.Decrease();
-    }
+    private void OnMouseDrag() =>
+        plyer.Decrease();
 
     private void OnMouseUp()
-    {
-        _plyerSphere.Shot();        
-    }
+        => plyer.Shot();        
 }

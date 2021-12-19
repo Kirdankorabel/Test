@@ -11,12 +11,11 @@ public class ObstacleController : MonoBehaviour
     [SerializeField] private Obstacle _obstaclePrefab;
     [SerializeField] private int _number; 
     private List<Obstacle> _obstacles;
-    private void Awake()
-    {
-        Singletone = this;
-    }
 
-    void Start()
+    private void Awake()
+        => Singletone = this;
+
+    private void Start()
     {
         _obstacles = new List<Obstacle>();
         CreateObstacles();

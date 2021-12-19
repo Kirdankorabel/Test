@@ -12,7 +12,7 @@ public class CheckedArea : MonoBehaviour
 
     void MyCollisions()
     {
-        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, _LayerMask);
+        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, _LayerMask);
         if (hitColliders.Length > 0) isFreeArea = false;
         else isFreeArea = true;
     }

@@ -6,12 +6,8 @@ public class FollowCamera : MonoBehaviour
     private Vector3 offset;
 
     void Start()
-    {
-        offset = transform.position - player.transform.position;
-    }
+        => offset = transform.position - player.transform.position;
 
     void Update()
-    {
-        transform.position = new Vector3(player.transform.position.x + offset.x, transform.position.y, transform.position.z);
-    }
+        => transform.position = new Vector3(player.transform.position.x + offset.x, transform.position.y, transform.position.z);
 }

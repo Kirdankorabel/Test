@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
@@ -11,7 +10,7 @@ public class Obstacle : MonoBehaviour
     public void Infect(float radius)
     {
         var obsts = ObstacleController.Singletone.GetObstaclesInRadius(this.transform.position, radius);
-        foreach(var item in obsts)
+        foreach (var item in obsts)
             item.GetInfected();
         GetInfected();
     }
@@ -23,16 +22,12 @@ public class Obstacle : MonoBehaviour
     }
 
     private void OnMouseDrag()
-    {
-        GameController.Singletone.GetPlayer.Decrease();
-    }
+        => GameController.Singletone.plyer.Decrease();
 
     private void OnMouseUp()
-    {
-        GameController.Singletone.GetPlayer.Shot();
-    }
+        => GameController.Singletone.plyer.Shot();
 
-    IEnumerator Destroyer()
+    private IEnumerator Destroyer()
     {
         yield return new WaitForSeconds(_timeInSec);
         Destroy(this.gameObject);
