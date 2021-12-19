@@ -22,12 +22,12 @@ public class ObstacleController : MonoBehaviour
         CreateObstacles();
     }
 
-    public List<Obstacle> GetObstaclesInRadius(Obstacle obstacle, float radius)
+    public List<Obstacle> GetObstaclesInRadius(Vector3 position, float radius)
     {
         var obstacles = _obstacles.Where
-            (obs => (obstacle.transform.position - obs.transform.position).magnitude < radius).ToList();
+            (obs => (position - obs.transform.position).magnitude < radius).ToList();
         _obstacles.RemoveAll
-            (obs => (obstacle.transform.position - obs.transform.position).magnitude < radius);
+            (obs => (position - obs.transform.position).magnitude < radius);
         return obstacles;
     }
 

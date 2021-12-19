@@ -10,36 +10,26 @@ public class Obstacle : MonoBehaviour
 
     public void Infect(float radius)
     {
-        var obsts = ObstacleController.Singletone.GetObstaclesInRadius(this, radius);
+        var obsts = ObstacleController.Singletone.GetObstaclesInRadius(this.transform.position, radius);
         foreach(var item in obsts)
             item.GetInfected();
         GetInfected();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other);
-        if (other.gameObject.CompareTag("Obstacle"))
-        {
-            var obstacle = other.gameObject.GetComponent<Obstacle>();
-            obstacle.GetInfected();
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        Debug.Log(other);
-        if (other.gameObject.CompareTag("Obstacle"))
-        {
-            var obstacle = other.gameObject.GetComponent<Obstacle>();
-            obstacle.GetInfected();
-        }
     }
 
     public void GetInfected()
     {
         _mesh.material.color = Color.yellow;
         StartCoroutine(Destroyer());
+    }
+
+    private void OnMouseDrag()
+    {
+        GameController.Singletone.GetPlayer.Decrease();
+    }
+
+    private void OnMouseUp()
+    {
+        GameController.Singletone.GetPlayer.Shot();
     }
 
     IEnumerator Destroyer()

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -23,7 +22,6 @@ public class Projectile : MonoBehaviour
     {
         StartCoroutine(IncreaseCorutine());
         transform.position = new Vector3(_spawnPoint.transform.position.x, _delta, _spawnPoint.transform.position.z);
-        Debug.Log(transform.position);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -40,7 +38,8 @@ public class Projectile : MonoBehaviour
     {
         this.gameObject.transform.localScale += new Vector3(increaseSpeed, increaseSpeed, increaseSpeed) * Time.deltaTime;
         _delta += increaseSpeed * 0.5f * Time.deltaTime;
-        damageRadius += 1f * Time.deltaTime;
+        damageRadius += increaseSpeed * 3 * Time.deltaTime;
+        
         yield return null;
     }
 }
