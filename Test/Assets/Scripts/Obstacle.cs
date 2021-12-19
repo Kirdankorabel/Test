@@ -7,6 +7,12 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private MeshRenderer _mesh;
     [SerializeField] private SphereCollider _meshCollider;
 
+    private void OnMouseDrag()
+        => GameController.Singletone.plyer.Decrease();
+
+    private void OnMouseUp()
+        => GameController.Singletone.plyer.Shot();
+
     public void Infect(float radius)
     {
         var obsts = ObstacleController.Singletone.GetObstaclesInRadius(this.transform.position, radius);
@@ -20,12 +26,6 @@ public class Obstacle : MonoBehaviour
         _mesh.material.color = Color.yellow;
         StartCoroutine(Destroyer());
     }
-
-    private void OnMouseDrag()
-        => GameController.Singletone.plyer.Decrease();
-
-    private void OnMouseUp()
-        => GameController.Singletone.plyer.Shot();
 
     private IEnumerator Destroyer()
     {

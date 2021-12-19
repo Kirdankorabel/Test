@@ -15,17 +15,19 @@ public class Player : MonoBehaviour
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private GameObject _projectileSpawn;
     [SerializeField] private Target _target;
-    [SerializeField] private float _nextShotTime = 1f;
+    [SerializeField] private float _nextShotTime = 2f;
 
     private Projectile _projectile;
     private bool _onGround = false;
     private float _lastShotTime = 0;
+    private Vector3 _offset;
         
     private void Update()
     {
         _target.SetTargetComponentsTransform(_playerSphere.gameObject);
 
-        WatchOut();
+        if (Input.touchCount > 0)
+            WatchOut();
 
         if (_target.GetAreaStatus() && _onGround && _projectile == null) 
             Move();
@@ -66,7 +68,8 @@ public class Player : MonoBehaviour
     {
         RaycastHit hit;
         int layerMask = (1 << 8);
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Touch touch = Input.GetTouch(0);
+        var ray = Camera.main.ScreenPointToRay(touch.position);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             var result = transform.position - hit.point;
@@ -82,6 +85,7 @@ public class Player : MonoBehaviour
             _projectile.Shot(transform.forward * -shotForce);
             _projectile = null;
             _lastShotTime = Time.time;
+            _projectileSpawn.transform.localPosition = new Vector3(0, 0, -20);
         }
     }
 
@@ -97,6 +101,7 @@ public class Player : MonoBehaviour
     {
         _playerSphere.transform.localScale -= decreaseSpeed * Time.deltaTime;
         _playerSphere.transform.position -= new Vector3(0, decreaseSpeed.x * 0.5f, 0) * Time.deltaTime;
+        _projectileSpawn.transform.position += new Vector3(0, 0, _projectilePrefab.increaseSpeed.z * 0.5f) * Time.deltaTime;
 
         yield return null;
     }

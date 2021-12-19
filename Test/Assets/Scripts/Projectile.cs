@@ -4,14 +4,23 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float damageRadius = 0;
+    public float lifetime = 3;
     public Vector3 increaseSpeed = new Vector3(0.2f, 0.2f, 0.2f);
     public float damageRadiusncIreaseSpeed = 0.8f;
     private GameObject _spawnPoint;
     private float _delta = 0;
+    private float _shotTime = 0;
 
-    public void Shot(Vector3 route)//переименовать. добавить таймер
+    private void Update()
     {
+        if (_shotTime != 0 && Time.time - _shotTime > lifetime)
+            Destroy(this.gameObject);
+    }
+
+    public void Shot(Vector3 route)
+    { 
         GetComponent<Rigidbody>().AddForce(route, ForceMode.Impulse);
+        _shotTime = Time.time;
     }
 
     public GameObject SpawnPoint

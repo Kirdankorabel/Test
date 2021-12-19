@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _exitButton;
-
-    public Text result;
+    [SerializeField] private Button _acceptButton;
+    [SerializeField] private GameObject _resultPanel;
+    [SerializeField] private GameObject _startPanel;
+    [SerializeField] private Text _result;
 
     private void Start()
     {
         _startButton.onClick.AddListener(Play);
         _exitButton.onClick.AddListener(Exit);
+        _acceptButton.onClick.AddListener(Accept);
         Target.victory += new System.Action(Win);
         Player.lose += new System.Action(Lose);
         GameController.Singletone.plyer.enabled = false;
@@ -20,7 +24,7 @@ public class UIController : MonoBehaviour
     private void Play()
     {
         GameController.Singletone.plyer.enabled = true;
-        this.gameObject.SetActive(false);
+        _startPanel.SetActive(false);
         GameController.Singletone.gameObject.SetActive(true);
     }
 
@@ -29,17 +33,21 @@ public class UIController : MonoBehaviour
 
     private void Win()
     {
+        _resultPanel.SetActive(true);
+        _result.text = "You win";
         GameController.Singletone.plyer.enabled = false;
-        this.gameObject.SetActive(true);
-        result.text = "You win";
-        Time.timeScale = 0;
     }
 
     private void Lose()
     {
+        _resultPanel.SetActive(true);
+        _result.text = "You lose";
         GameController.Singletone.plyer.enabled = false;
-        this.gameObject.SetActive(true);        
-        result.text = "You lose";
-        Time.timeScale = 0;
+    }
+
+    private void Accept()
+    {
+        _resultPanel.SetActive(false);
+        SceneManager.LoadScene("GameScene");
     }
 }
