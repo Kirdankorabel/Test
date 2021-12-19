@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
             _projectile.Shot(transform.forward * -shotForce);
             _projectile = null;
             _lastShotTime = Time.time;
-            _projectileSpawn.transform.localPosition = new Vector3(0, 0, -20);
+            _projectileSpawn.transform.localPosition = new Vector3(0, 0, -10);
         }
     }
 
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
     {
         _playerSphere.transform.localScale -= decreaseSpeed * Time.deltaTime;
         _playerSphere.transform.position -= new Vector3(0, decreaseSpeed.x * 0.5f, 0) * Time.deltaTime;
-        _projectileSpawn.transform.position += new Vector3(0, 0, _projectilePrefab.increaseSpeed.z * 0.5f) * Time.deltaTime;
+        _projectileSpawn.transform.localPosition += new Vector3(0, 0, _projectilePrefab.increaseSpeed.z * 0.5f) * Time.deltaTime;
 
         yield return null;
     }
