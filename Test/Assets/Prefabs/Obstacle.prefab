@@ -93,7 +93,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeInSec: 0.5
   _mesh: {fileID: 1540222002495618663}
-  _meshCollider: {fileID: 0}
+  _collider: {fileID: 1540222002495618660}
+  _marker: {r: 0.13551502, g: 0.24313726, b: 0.13536845, a: 1}
+  _unmarker: {r: 0.13551502, g: 0.6313726, b: 0.13536845, a: 1}
 --- !u!136 &1540222002495618660
 CapsuleCollider:
   m_ObjectHideFlags: 0

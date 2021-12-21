@@ -105,10 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404533b2d91018f40996efa0001f6d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageRadius: 0
+  damageRadius: 3
   lifetime: 6
-  increaseSpeed: {x: 0.7, y: 0.7, z: 0.7}
-  damageRadiusncIreaseSpeed: 3
+  increaseSpeed: {x: 0.8, y: 0.8, z: 0.8}
+  damageRadiusncIreaseSpeed: 2
 --- !u!54 &6419002525340482438
 Rigidbody:
   m_ObjectHideFlags: 0

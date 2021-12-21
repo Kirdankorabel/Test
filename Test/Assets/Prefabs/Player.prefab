@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decreaseSpeed: {x: 0.2, y: 0.2, z: 0.2}
   force: 1000
-  shotForce: 20
+  startShotForce: 20
   minScale: 3
   _mailnCamera: {fileID: 0}
   _playerSphere: {fileID: 5267214166722503920}

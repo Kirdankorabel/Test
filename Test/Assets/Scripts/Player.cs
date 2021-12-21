@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public Vector3 decreaseSpeed = new Vector3(0.1f, 0.1f, 0.1f);
     public float force = 10;
-    public float shotForce = 10;
+    public float startShotForce = 3;
     public float minScale = 3;
     public static event Action lose;
 
@@ -16,11 +16,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _projectileSpawn;
     [SerializeField] private Target _target;
     [SerializeField] private float _nextShotTime = 2f;
+    private float _shotForce;
 
     private Projectile _projectile;
     private bool _onGround = false;
     private float _lastShotTime = 0;
-    private Vector3 _offset;
         
     private void Update()
     {
@@ -39,8 +39,11 @@ public class Player : MonoBehaviour
             _onGround = true;
     }
 
+    public float GetRadius()
+        => _playerSphere.transform.localScale.x / 2;
+
     public void Decrease()
-    {
+    {        
         if (_onGround && !_target.GetAreaStatus() && Time.time - _lastShotTime > _nextShotTime)
         {
             if (_projectile == null)
@@ -82,7 +85,7 @@ public class Player : MonoBehaviour
     {
         if (_projectile != null)
         {
-            _projectile.Shot(transform.forward * -shotForce);
+            _projectile.Shot(transform.forward * -_shotForce);
             _projectile = null;
             _lastShotTime = Time.time;
             _projectileSpawn.transform.localPosition = new Vector3(0, 0, -10);
@@ -91,6 +94,7 @@ public class Player : MonoBehaviour
 
     private void CreateProjectile()
     {
+        _shotForce = startShotForce;
         _projectile = Instantiate(_projectilePrefab, _projectileSpawn.transform.position, Quaternion.identity);
         _projectile.gameObject.transform.localScale = _projectile.increaseSpeed;
         _playerSphere.transform.localScale -= decreaseSpeed;
@@ -99,9 +103,10 @@ public class Player : MonoBehaviour
 
     private IEnumerator DecreaseCorutine()
     {
+        _shotForce += decreaseSpeed.x * 10 * Time.deltaTime;
         _playerSphere.transform.localScale -= decreaseSpeed * Time.deltaTime;
-        _playerSphere.transform.position -= new Vector3(0, decreaseSpeed.x * 0.5f, 0) * Time.deltaTime;
-        _projectileSpawn.transform.localPosition += new Vector3(0, 0, _projectilePrefab.increaseSpeed.z * 0.5f) * Time.deltaTime;
+        _playerSphere.transform.position -= new Vector3(0, decreaseSpeed.y * 0.5f, 0) * Time.deltaTime;
+        _projectileSpawn.transform.localPosition += new Vector3(0, 0, - (decreaseSpeed.z * 0.5f)) * Time.deltaTime;
 
         yield return null;
     }

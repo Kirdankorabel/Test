@@ -3,7 +3,7 @@
 public class GameController : MonoBehaviour
 {
     public static GameController Singletone { get; set; }
-    public Player plyer;
+    public Player player;
     [SerializeField] private Plane _plane;
     [SerializeField] private Plane _target;
     
@@ -11,8 +11,14 @@ public class GameController : MonoBehaviour
         => Singletone = this;
 
     private void OnMouseDrag()
-        => GameController.Singletone.plyer.Decrease();
+    { 
+        //if (!player.enabled)
+            player.Decrease();
+    }
 
     private void OnMouseUp()
-        => GameController.Singletone.plyer.Shot();
+    {
+        //if (!player.enabled)   
+            player.Shot();
+    }
 }

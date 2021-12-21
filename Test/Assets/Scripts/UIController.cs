@@ -18,14 +18,13 @@ public class UIController : MonoBehaviour
         _acceptButton.onClick.AddListener(Accept);
         Target.victory += new System.Action(Win);
         Player.lose += new System.Action(Lose);
-        GameController.Singletone.plyer.enabled = false;
+        GameController.Singletone.player.enabled = false;
     }
 
     private void Play()
     {
-        GameController.Singletone.plyer.enabled = true;
+        GameController.Singletone.player.enabled = true;
         _startPanel.SetActive(false);
-        GameController.Singletone.gameObject.SetActive(true);
     }
 
     private void Exit()
@@ -35,14 +34,14 @@ public class UIController : MonoBehaviour
     {
         _resultPanel.SetActive(true);
         _result.text = "You win";
-        GameController.Singletone.plyer.enabled = false;
+        GameController.Singletone.player.enabled = false;
     }
 
     private void Lose()
     {
         _resultPanel.SetActive(true);
         _result.text = "You lose";
-        GameController.Singletone.plyer.enabled = false;
+        GameController.Singletone.player.enabled = false;
     }
 
     private void Accept()
