@@ -30,6 +30,15 @@ public class ObstacleController : MonoBehaviour
         return obstacles;
     }
 
+    public void CreateNewObstacles()
+    {
+        foreach (var item in _obstacles)
+            Destroy(item.gameObject);
+        _obstacles = new List<Obstacle>();
+        CreateObstacles();
+    }    
+
+
     private void CreateObstacles()
     {
         for(var i = 0; i < _number; i++)

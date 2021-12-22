@@ -13,9 +13,13 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
+        _startPanel.SetActive(true);
+        _resultPanel.SetActive(false);
+
         _startButton.onClick.AddListener(Play);
         _exitButton.onClick.AddListener(Exit);
         _acceptButton.onClick.AddListener(Accept);
+
         Target.victory += new System.Action(Win);
         Player.lose += new System.Action(Lose);
         GameController.Singletone.player.enabled = false;
@@ -25,6 +29,7 @@ public class UIController : MonoBehaviour
     {
         GameController.Singletone.player.enabled = true;
         _startPanel.SetActive(false);
+        GameController.Singletone.gameObject.SetActive(true);
     }
 
     private void Exit()
@@ -46,7 +51,8 @@ public class UIController : MonoBehaviour
 
     private void Accept()
     {
+        _startPanel.SetActive(true);
         _resultPanel.SetActive(false);
-        SceneManager.LoadScene("GameScene");
+        GameController.Singletone.Restart();
     }
 }

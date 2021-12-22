@@ -21,7 +21,12 @@ public class Player : MonoBehaviour
     private Projectile _projectile;
     private bool _onGround = false;
     private float _lastShotTime = 0;
-        
+
+    public Target SetTarget
+    {
+        set => _target = value;
+    }
+
     private void Update()
     {
         _target.SetTargetComponentsTransform(_playerSphere.gameObject);
@@ -29,7 +34,7 @@ public class Player : MonoBehaviour
         if (Input.touchCount > 0)
             WatchOut();
 
-        if (_target.GetAreaStatus() && _onGround && _projectile == null) 
+        if (_target.GetAreaStatus() && _onGround) 
             Move();
     }
 
@@ -63,8 +68,11 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        this.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 2) * force);
-        _onGround = false;
+        if (_projectile == null)
+        {
+            this.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 2) * force);
+            _onGround = false;
+        }
     }
 
     private void WatchOut()
